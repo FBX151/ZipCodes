@@ -10,13 +10,12 @@ public class Main {
 
     public static void main(String[] args) {
 
-        List<ZipCode> zipCodeList = CSVReader.readZipCodes();
+        List<ZipCode> zipCodeList = CSVReader.readZipCodes("zipcodes.csv");
         System.out.println("number of zipcodes - " + zipCodeList.size());
         ZipCodeCityBiMap zipCodeCityBiMap = new ZipCodeCityBiMap(zipCodeList);
 
         System.out.println("City of ZipCode - L-7599 - " + zipCodeCityBiMap.getCityForZipCode("L-7599"));
         System.out.println("ZipCodes of Ettelbruck - " + zipCodeCityBiMap.getZipCodesForCity("Ettelbruck"));
-        System.out.println();
 
     }
 

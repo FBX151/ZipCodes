@@ -2,17 +2,18 @@ package org.zipcodes.util;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.nio.charset.MalformedInputException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.zipcodes.model.ZipCode;
 import org.zipcodes.validator.ZipCodeValidator;
 
+/**
+ * CSV reader split csvFile to each zip codes and return zip code list.
+ */
 public class CSVReader {
-    public static List<ZipCode> readZipCodes() {
+    public static List<ZipCode> readZipCodes(String csvFile) {
         List<ZipCode> zipCodeList = new ArrayList<>();
-        String csvFile = "zipcodes.csv";
         String line = "";
         String cvsSplitBy = ",";
 

@@ -22,17 +22,22 @@ public class ZipCodeCityBiMap {
         zipCodeList.forEach(zipCode -> {
             String city = zipCode.getCity();
             String code = zipCode.getCode();
-            cityToPostalCodesMap.computeIfAbsent(city, k -> new ArrayList<>()).add(code);
+
+            if(!cityToPostalCodesMap.containsKey(city)) {
+                cityToPostalCodesMap.put(city, new ArrayList<>());
+            }
+            cityToPostalCodesMap.get(city).add(code);
 
             postalCodeToCityMap.put(code, city);
         });
-
-        for (String city : cityToPostalCodesMap.keySet()) {
-            System.out.println("city - " + city);
-            System.out.println("cityToPostalCodesMap - " + cityToPostalCodesMap.get(city));
-        }
     }
 
+    /**
+     * This method returns the city by code, if it contains in our file.
+     * If not it will throw an exception.
+     * @param code
+     * @return
+     */
     public String getCityForZipCode(String code) {
         if (postalCodeToCityMap.containsKey(code)) {
             return postalCodeToCityMap.get(code);
@@ -40,6 +45,12 @@ public class ZipCodeCityBiMap {
         throw new IllegalArgumentException("ZipCode is unknown - " + code);
     }
 
+    /**
+     * This method returns the list of codes by city, if city contains in our file.
+     * If not it will throw an exception
+     * @param city
+     * @return
+     */
     public List<String> getZipCodesForCity(String city) {
         if (cityToPostalCodesMap.containsKey(city)) {
             return cityToPostalCodesMap.get(city);
